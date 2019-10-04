@@ -1,3 +1,22 @@
-convert -crop 16x16 spritesheet.png sprite.png
-convert sprite-{0..1439}.png -set option:distort:viewport 48x48-16-16 -virtual-pixel Edge -filter point -distort SRT 0 +repage sprite-bleed.png
-montage sprite-bleed-{0..1439}.png -tile 40x36 -geometry 48x48+0+0 -background none spritesheet-bleed.png
+#!/bin/bash
+
+if [ $# -lt 3 ]
+  then
+    echo "usage: SOURCE DESTINATION TILEWIDTH [TILEHEIGHT]"
+    exit
+fi
+
+sourcepath=$1
+destpath=$2
+tilew=$3
+tileh=${4:-$3}
+
+sourcew=`identify -format %w $sourcepath`
+sourceh=`identify -format %h $sourcepath`
+columns=$(($sourcew / $tilew))
+rows=$(($sourceh / $tileh))
+newtilew=$(($tilew + 2))
+newtileh=$(($tileh + 2))
+
+convert -crop ${tilew}x${tileh} $sourcepath -define distort:viewport=${newtilew}x${newtileh}-1-1 -filter point -distort SRT 0 +repage miff:- |
+montage - -tile ${columns}x${rows} -geometry +0+0 -background none $destpath
