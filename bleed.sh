@@ -27,7 +27,7 @@ usage() {
 		                                (defaults to 0x0)
 		  -O, --output-offset XX YY     the margins added to the output image
 		                                (defaults to 0x0)
-		  -f, --force					overwrite the output file if it exists
+		  -f, --force                   overwrite the output file if it exists
 		  -v, --verbose                 display computations during execution
 		  -h, --help                    display this help text and exit
 	EOM
