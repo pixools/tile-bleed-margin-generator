@@ -2,18 +2,21 @@
 
 Automatically stretch out the 1px edge of each tile in a tile sheet to compensate for tile bleed in 2D game development.
 
-This should solve rounding errors which can cause tiles to slightly bleed into their neighbors, such as the very common "gap between tiles" problem in Unity.
+This should solve rounding errors which can cause tiles to slightly bleed into their neighbors, such as the very common "gap between tiles" problem in Unity. The script was forked cjonasw's but I added so many features that it ended up quite different from the original.
 
 ## Dependencies
 
-This script depends on ImageMagick (tested using ImageMagick 7). `convert`, `montage` and `identify` must be in your PATH.
+This script was written for bash and depends on ImageMagick (tested using `ImageMagick 6.9.7-4`). The `convert`, `montage` and `identify` commands must be in your PATH.
 
-Until someone makes a Windows version (`.cmd` or `.ps`) you should be able to run it using bash in the Windows Subsystem for Linux.
+Until someone makes a Windows version (`.cmd` or `.ps`) you should be able to run it on Windows 10 using bash in the Windows Subsystem for Linux, provided you've installed ImageMagick within your virtual linux.
 
 ## Sample usage
 
-    ./bleed.sh input.png output.png 16
+    ./bleed.sh input.png output.png --tile-size 16 16 --bleed 3 --input-gap 4 4 --output-gap 1 1 --input-offset 20 20 --output-offset 3 3
 
-...where `input.png` is a tile sheet with 16x16 tiles without any gap between tiles. If your tiles are not square, you can specify a tile height as a 4th argument.
+The script determines the number of tiles based on the size of the file. It ignores content above and the the left of the specified `--input-offset`, and any leftover space that is smaller than a tile on the bottom right. See the sample files in the repository.
 
-The resulting `output.png` can then be used by some game engines specifying a 2px gap between tiles, and perhaps 1px offset from the top left corner for the first tile.
+## Known issues
+
+-   Unknown options or options with the wrong number of parameters produce unclear error messages.
+-   The `--help` flag doesn't work properly because the command fails on missing arguments first. Mitigated by showing the usage on missing arguments.
