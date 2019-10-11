@@ -2,7 +2,7 @@
 
 Automatically stretch out the 1px edge of each tile in a tile sheet to compensate for tile bleed in 2D game development.
 
-This should solve rounding errors which can cause tiles to slightly bleed into their neighbors, such as the very common "gap between tiles" problem in Unity. The script was forked cjonasw's but I added so many features that it ended up quite different from the original.
+This should solve rounding errors which can cause tiles to slightly bleed into their neighbors, such as the very common "gap between tiles" problem in Unity. The script started as a fork but I added so many features that it ended up quite different from [the original](https://github.com/cjonasw/tile-bleed-margin-generator).
 
 ## Dependencies
 
