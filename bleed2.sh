@@ -6,10 +6,9 @@ tileSize=$4
 rowCount=$(( spritesheetHeight / tileSize ))
 colCount=$(( spritesheetWidth / tileSize ))
 numTiles=$(( colCount * rowCount ))
-endTileIndex=$(( numTiles - 1))
 tileSizeWithPadding=$((tileSize + 2))
 
-for (( i = 0; i <= endTileIndex; i++ )); do
+for (( i = 0; i < numTiles; i++ )); do
 sprites+=" sprite-$i.png"
 spriteBleeds+=" sprite-bleed-$i.png"
 done
