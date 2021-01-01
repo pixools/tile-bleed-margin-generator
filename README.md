@@ -4,6 +4,8 @@ Automatically stretch out the 1px edge of each tile in a tile sheet to compensat
 
 This should solve rounding errors which can cause tiles to slightly bleed into their neighbors, such as the very common "gap between tiles" problem in Unity. The script started as a fork but I added so many features that it ended up quite different from [the original](https://github.com/cjonasw/tile-bleed-margin-generator).
 
+Alternatively, you might want to look at chonkypixel's solution which is integrated in the Unity editor. I haven't tested it myself, but it has a UI which does exactly the same thing. https://assetstore.unity.com/packages/2d/textures-materials/tiles/2d-tile-gap-fixing-tool-157060
+
 ## Dependencies
 
 This script was written for bash and depends on ImageMagick (tested using `ImageMagick 6.9.7-4`). The `convert`, `montage` and `identify` commands must be in your PATH.
