@@ -7,7 +7,7 @@ This script uses [ImageMagick](https://imagemagick.org/script/download.php).
 
 Make sure your script is in the same directory as the file, open Terminal and `cd` to this folder and run (as an example):
 
-`sh bleed.sh my-spritesheet.png 640 576 16` (`sh bleed.sh FILE_NAME WIDTH HEIGHT TILE_SIZE`)
+`sh bleed.sh environment_grass png _bleed 128 128 16` (`sh bleed.sh FILE_NAME FILE_TYPE NEW_SUFFIX WIDTH HEIGHT TILE_SIZE`)
 
 ## TODO: Improvements
 
