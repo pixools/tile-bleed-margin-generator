@@ -1,3 +1,21 @@
-convert -crop 16x16 spritesheet.png sprite.png
-convert sprite-{0..1439}.png -set option:distort:viewport 48x48-16-16 -virtual-pixel Edge -filter point -distort SRT 0 +repage sprite-bleed.png
-montage sprite-bleed-{0..1439}.png -tile 40x36 -geometry 48x48+0+0 -background none spritesheet-bleed.png
+spritesheetFile=$1
+spritesheetWidth=$2
+spritesheetHeight=$3
+tileSize=$4
+
+rowCount=$(( spritesheetHeight / tileSize ))
+columnCount=$(( spritesheetWidth / tileSize ))
+numberOfTiles=$(( columnCount * rowCount ))
+tileSizeWithPadding=$((tileSize + 2))
+
+for (( i = 0; i < numberOfTiles; i++ )); do
+sprites+=" ./temp/sprite-$i.png"
+spriteBleeds+=" ./temp/sprite-bleed-$i.png"
+done
+
+rm -rf temp
+mkdir temp
+convert -crop "$tileSize"x"$tileSize" "$spritesheetFile" ./temp/sprite.png
+convert $sprites -set option:distort:viewport "$tileSizeWithPadding"x"$tileSizeWithPadding"-1-1 -virtual-pixel Edge -filter point -distort SRT 0 +repage ./temp/sprite-bleed.png
+montage $spriteBleeds -tile "$columnCount"x"$rowCount" -geometry "$tileSizeWithPadding"x"$tileSizeWithPadding"-0-0 -background none "$spritesheetFile"-bleed.png
+rm -rf temp
